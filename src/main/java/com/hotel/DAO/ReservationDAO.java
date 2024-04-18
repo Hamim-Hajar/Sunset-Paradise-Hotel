@@ -1,5 +1,7 @@
 package com.hotel.DAO;
 
-public interface ReservationDAO {
+import java.util.List;
 
+public interface ReservationDAO {
+	 List<Reservationclasse> getReservationsByUserId(int userId);
 }

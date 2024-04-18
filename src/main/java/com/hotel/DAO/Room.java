@@ -1,4 +1,4 @@
-package com.hotel.servlets;
+package com.hotel.DAO;
 
 public class Room {
 	 
@@ -27,7 +27,7 @@ public class Room {
      public double getprice() {
     	 return price;
      }
-     public void setroomtype(double price) {
+     public void setprice(double price) {
 			this.price = price;
 		}
      public String getequipement() {
@@ -40,7 +40,7 @@ public class Room {
      public boolean getdispo() {
     	 return dispo;
      }
-     public void setequipement(boolean dispo) {
+     public void setdispo(boolean dispo) {
 			this.dispo = dispo;
 		}
      
