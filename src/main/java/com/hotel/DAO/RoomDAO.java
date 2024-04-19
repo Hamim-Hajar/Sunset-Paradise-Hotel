@@ -9,4 +9,6 @@ import java.util.*;
 public interface RoomDAO {
 	 List<Room> searchRooms(String startDate, String endDate, int numberOfPeople, String roomType);
 	    boolean makeReservation(int roomId, String reserveDate);
+	    List<Room> displayRoom()throws ClassNotFoundException, SQLException;
+	    
 }

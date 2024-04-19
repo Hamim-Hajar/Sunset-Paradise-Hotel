@@ -1,5 +1,4 @@
 package com.hotel.servlets;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -13,25 +12,50 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.hotel.DAO.ReservationDAO;
+import com.hotel.DAO.RoomDAO;
+import com.hotel.DAO.RoomDAOImpl;
+import com.hotel.DAO.Conn;
+
 /**
  * Servlet implementation class ReservationServlet
  */
 @WebServlet("/ReservationServlet")
 public class ReservationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	 private static final String JDBC_URL = "jdbc:mysql://localhost:3306/hotel";
-	    private static final String JDBC_USER = "root";
-	    private static final String JDBC_PASSWORD = "jujuRO55";
-       
+	 
+      private RoomDAO roomDAO;
+      private ReservationDAO reservationDAO;
+      private Connection connection; 
+	    
+     
+	    @Override
+	    public void init() throws ServletException {
+	          super.init();
+	         
+	          connection = Conn.getConnection();
+	          
+	          roomDAO = new RoomDAOImpl(connection);
+	          // Vous devez initialiser reservationDAO ici si vous en avez un
+	      }
     
     public ReservationServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		
+		RoomDAO roompl =new RoomDAOImpl();
+       
+            try {
+                request.setAttribute("rooms", roompl.displayRoom());
+              
+            } catch (ClassNotFoundException | SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            this.getServletContext().getRequestDispatcher("/WEB-INF/hotel.jsp").forward(request, response);
 	}
 	
 	
@@ -73,27 +97,7 @@ public class ReservationServlet extends HttpServlet {
 	}
 	private void searchRooms(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	        
-	        try (Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
-	           
-	            String sql = "SELECT * FROM rooms WHERE available = true";
-	            PreparedStatement statement = conn.prepareStatement(sql);
-	            ResultSet resultSet = statement.executeQuery();
-
-	           
-	            PrintWriter out = response.getWriter();
-	            out.println("<html><body>");
-	            out.println("<h2>Résultats de la recherche :</h2>");
-	            while (resultSet.next()) {
-	                
-	                out.println("<p>Type de chambre : " + resultSet.getString("type") + "</p>");
-	               
-	            }
-	            out.println("</body></html>");
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erreur de base de données");
-	        }
-	    }
+	}
 
 
 }

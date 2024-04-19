@@ -6,9 +6,16 @@ public class Room {
 	 private int idroom;
 	 private String roomtype;
 	 private double price;
+	 
 	 private String equipement;
 	 private boolean dispo;
-	 //getters and setters
+	 public Room(int idroom2, String roomtype2, double price2, String equipement2, Boolean dispo2) {
+		// TODO Auto-generated constructor stub
+	}
+	public Room() {
+		// TODO Auto-generated constructor stub
+	}
+	//getters and setters
 	 public int getidroom() {
 			return idroom;
 		}
@@ -30,12 +37,7 @@ public class Room {
      public void setprice(double price) {
 			this.price = price;
 		}
-     public String getequipement() {
-    	 return roomtype;
-     }
-     public void setequipement(String equipement) {
-			this.equipement = equipement;
-		}
+    
      
      public boolean getdispo() {
     	 return dispo;
@@ -43,5 +45,11 @@ public class Room {
      public void setdispo(boolean dispo) {
 			this.dispo = dispo;
 		}
+	public String getEquipement() {
+		return equipement;
+	}
+	public void setEquipement(String equipement) {
+		this.equipement = equipement;
+	}
      
 }
